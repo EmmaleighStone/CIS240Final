@@ -20,6 +20,7 @@ public class DepositActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppController appController = new AppController(DepositActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deposit);
         DecimalFormat df = new DecimalFormat( "#.00" );
@@ -28,13 +29,13 @@ public class DepositActivity extends AppCompatActivity {
         TextView txtBalanceAmt = (TextView) findViewById(R.id.txtBalanceAmtD);
         EditText editDeposit = (EditText) findViewById(R.id.editDeposit);
         Button btnDeposit = (Button) findViewById(R.id.btnDepositNow);
-        txtBalanceAmt.setText("$" + df.format(AppController.accounts.get(accountId).balance));
+        txtBalanceAmt.setText("$" + df.format(appController.getAccount(accountId).getBalance()));
 
         btnDeposit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Double depositAmt = Double.parseDouble(editDeposit.getText().toString());
-                AppController.depositAccount(AppController.accounts, accountId, depositAmt);
+                appController.depositToAccount(accountId, depositAmt);
                 startActivity(new Intent(DepositActivity.this, HomeActivity.class));
             }
         });

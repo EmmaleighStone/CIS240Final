@@ -1,15 +1,103 @@
 package com.project.myapplication.Controller;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.TextView;
 
-import com.project.myapplication.Models.Account;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
+import com.project.myapplication.Models.Account;
+import com.project.myapplication.Models.Transaction;
+import com.project.myapplication.Repos.BankRepository;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class AppController {
 
-    public static ArrayList<Account> accounts = new ArrayList<Account>();
+    private BankRepository mBankRepo;
+
+    public AppController(Context context)
+    {
+        mBankRepo = BankRepository.getInstance(context);
+    }
+
+    public List<Account> getAccounts() {
+        return mBankRepo.getAccounts();
+    }
+
+    public Account getAccount(long accountId) {
+        return mBankRepo.getAccount(accountId);
+    }
+
+    public void addAccount(Account account) {
+        mBankRepo.addAccount(account);
+    }
+
+    public void updateAccount(Account account) {
+        mBankRepo.updateAccount(account);
+    }
+
+    public List<Transaction> getTransactions(Account account)
+    {
+        return mBankRepo.getTransactions(account.getId());
+    }
+
+    public void addTransaction(Transaction transaction) {
+        mBankRepo.addTransaction(transaction);
+    }
+
+    public long loginUser(String username, String password)
+    {
+
+        List<Account> accounts = mBankRepo.getAccounts();
+        for (int i = 0; i < accounts.size(); i++)
+        {
+            if (accounts.get(i).getUsername() == username && accounts.get(i).getPassword() == password)
+            {
+                return accounts.get(i).getId();
+            }
+        }
+        return 0;
+    }
+
+    public void withdrawalFromAccount(long accountId, Double withdrawalAmt)
+    {
+        Account account = this.getAccount(accountId);
+        Transaction transaction = new Transaction();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        transaction.setDate(dateFormat.format(date));
+        transaction.setType("withdrawal");
+        transaction.setAmount(withdrawalAmt);
+        transaction.setAccountId(accountId);
+        mBankRepo.addTransaction(transaction);
+        account.setBalance(account.getBalance() - withdrawalAmt);
+        mBankRepo.updateAccount(account);
+    }
+
+    public void depositToAccount(long accountId, Double depositAmt)
+    {
+        Account account = this.getAccount(accountId);
+        Transaction transaction = new Transaction();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+        transaction.setDate(dateFormat.format(date));
+        transaction.setType("deposit");
+        transaction.setAmount(depositAmt);
+        transaction.setAccountId(accountId);
+        mBankRepo.addTransaction(transaction);
+        account.setBalance(account.getBalance() + depositAmt);
+        mBankRepo.updateAccount(account);
+    }
+
+    /*public static ArrayList<Account> accounts = new ArrayList<Account>();
 
 
     public static void addAccount(ArrayList<Account> accounts, Account account)
@@ -69,6 +157,6 @@ public class AppController {
         AppController.addAccount(accounts, new Account("John", "Doe", "johndoe", "1234", 200.00));
         AppController.addAccount(accounts, new Account("Mary", "Smith", "marysmith", "5678", 960.66));
         AppController.addAccount(accounts, new Account("Marcus", "Stone", "marcusstone", "1111", 14.28));
-    }
+    }*/
 
 }

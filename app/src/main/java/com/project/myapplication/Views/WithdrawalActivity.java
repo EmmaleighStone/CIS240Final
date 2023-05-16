@@ -17,8 +17,10 @@ import java.text.DecimalFormat;
 
 public class WithdrawalActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AppController appController = new AppController(WithdrawalActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_withdrawal);
         DecimalFormat df = new DecimalFormat( "#.00" );
@@ -27,13 +29,13 @@ public class WithdrawalActivity extends AppCompatActivity {
         TextView txtBalanceAmt = (TextView) findViewById(R.id.txtBalanceAmtW);
         EditText editWithdrawal = (EditText) findViewById(R.id.editWithdrawal);
         Button btnWithdrawal = (Button) findViewById(R.id.btnWithdrawalNow);
-        txtBalanceAmt.setText("$" + df.format(AppController.accounts.get(accountId).balance));
+        txtBalanceAmt.setText("$" + df.format(appController.getAccount(accountId).getBalance()));
 
         btnWithdrawal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Double withdrawalAmt = Double.parseDouble(editWithdrawal.getText().toString());
-                AppController.withdrawalAccount(AppController.accounts, accountId, withdrawalAmt);
+                appController.withdrawalFromAccount(accountId, withdrawalAmt);
                 startActivity(new Intent(WithdrawalActivity.this, HomeActivity.class));
             }
         });
