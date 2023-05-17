@@ -3,16 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:rowCount="4"
-    android:columnCount="2"
-    tools:context=".Views.DepositActivity">
+    android:columnCount="2">
 
-    <ImageView
-        android:id="@+id/imgFront"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo1"
+        android:text="@string/txtWithdrawalTitle"
+        style="@style/title"
+        android:layout_columnSpan="2"/>
+
+    <ImageView
+        android:id="@+id/imgWithdrawal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
         android:layout_columnSpan="2"
+        style="@style/image"
         />
 
     <TextView
@@ -20,7 +29,7 @@
         android:layout_height="wrap_content"
         android:text="@string/txtAccountBalance"/>
     <TextView
-        android:id="@+id/txtBalanceAmtD"
+        android:id="@+id/txtBalanceAmtW"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtDollarSign"
@@ -28,19 +37,19 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtDepositAmt"
+        android:text="@string/txtWithdrawalAmt"
         />
     <EditText
-        android:id="@+id/editDeposit"
+        android:id="@+id/editWithdrawal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="@string/txtSampleMoney"/>
 
     <Button
-        android:id="@+id/btnDepositNow"
+        android:id="@+id/btnWithdrawalNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btnDeposit"/>
+        android:text="@string/btnWithdrawal"/>
 
 
 </GridLayout>

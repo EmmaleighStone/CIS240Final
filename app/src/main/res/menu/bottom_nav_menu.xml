@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:title="@string/navBalance"
+        android:icon="@drawable/transactions"/>
+
+    <item
+        android:id="@+id/navigation_deposit"
+        android:title="@string/navDeposit"
+        android:icon="@drawable/deposit"/>
+
+    <item
+        android:id="@+id/navigation_withdrawal"
+        android:title="@string/navWithdrawal"
+        android:icon="@drawable/withdrawal"/>
+
+</menu>

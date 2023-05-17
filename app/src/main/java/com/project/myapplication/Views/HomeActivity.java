@@ -1,57 +1,65 @@
 package com.project.myapplication.Views;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.Menu;
+import android.view.MenuItem;
 
-import com.project.myapplication.Controller.AppController;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.project.myapplication.R;
-
-import java.text.DecimalFormat;
 
 public class HomeActivity extends AppCompatActivity {
 
+    MediaPlayer mediaPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AppController appController = new AppController(HomeActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        ImageView imageView = (ImageView) findViewById(R.id.imgHome);
-        imageView.getLayoutParams().width = 150;
-        imageView.getLayoutParams().height = 150;
-        DecimalFormat df = new DecimalFormat( "#.00" );
-        SharedPreferences sharedPreferences = getSharedPreferences("sharedPreferences", MODE_PRIVATE);
-        int accountId = sharedPreferences.getInt("accountId", 0);
-        TextView txtWelcomeUser = (TextView) findViewById(R.id.txtWelcomeUser);
-        TextView txtBalanceAmt = (TextView) findViewById(R.id.txtBalanceAmt);
-        Button btnDeposit = (Button) findViewById(R.id.btnDeposit);
-        Button btnWithdrawal = (Button) findViewById(R.id.btnWithdrawal);
 
-        txtWelcomeUser.setText("Welcome " + appController.getAccount(accountId).getFirstName() +
-                " " + appController.getAccount(accountId).getLastName() + "!");
-        txtBalanceAmt.setText("$" + df.format(appController.getAccount(accountId).getBalance()));
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment);
 
-        /*txtWelcomeUser.setText("Welcome " + AppController.accounts.get(accountId).firstName + " " + AppController.accounts.get(accountId).lastName + "!");
-        txtBalanceAmt.setText("$" + df.format(AppController.accounts.get(accountId).balance));*/
-        btnDeposit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, DepositActivity.class));
-            }
-        });
-        btnWithdrawal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, WithdrawalActivity.class));
-            }
-        });
+        if (navHostFragment != null) {
+            NavController navController = navHostFragment.getNavController();
+
+            AppBarConfiguration appBarConfig = new AppBarConfiguration.Builder(
+                    R.id.navigation_home, R.id.navigation_deposit, R.id.navigation_withdrawal)
+                    .build();
+
+            NavigationUI.setupActionBarWithNavController(this, navController, appBarConfig);
+            NavigationUI.setupWithNavController(navView, navController);
+        }
+
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(HomeActivity.this, R.raw.moneymoneymoney);
+            mediaPlayer.start();
+        }
+    }
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            getMenuInflater().inflate(R.menu.menu, menu);
+            return true;
+        }
+        @Override
+        public boolean onOptionsItemSelected (@NonNull MenuItem item){
+
+            startActivity(new Intent(HomeActivity.this, MainActivity.class));
+            return true;
+
+        }
+    @Override
+    protected void onDestroy()
+    {
+        super.onDestroy();
+        mediaPlayer.release();
     }
 }

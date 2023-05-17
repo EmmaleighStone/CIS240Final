@@ -1,46 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.project.myapplication.Views.HomeActivity">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtWelcome"
+        android:text="@string/txtBalanceInquiry"
         style="@style/title"/>
     <ImageView
-        android:id="@+id/imgFront"
+        android:id="@+id/imgHome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
         style="@style/image"/>
     <TextView
+        android:id="@+id/txtWelcomeUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/txtIntro"
+        android:text="Welcome to the Ten Talents App!"
         style="@style/headers"/>
-    <EditText
-        android:id="@+id/editUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/txtUsername"/>
-    <EditText
-        android:id="@+id/editPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/txtPassword"/>
+
     <TextView
-        android:id="@+id/txtError"
+        android:id="@+id/txtBalanceAmt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/headers"/>
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="100dp"
+        android:text="@string/txtDollarSign"
+        style="@style/headers"
+        />
+    <TextView
+        android:id="@+id/txtTransactionsTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="@string/btnLogIn"
-        style="@style/headers"/>
+        android:text= "@string/txtTransactionsTitle"
+        style="@style/headers"
+        />
+    <TextView
+        android:id="@+id/txtTransactionsHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text= ""
+        style="@style/headers"
+        />
+
 </LinearLayout>

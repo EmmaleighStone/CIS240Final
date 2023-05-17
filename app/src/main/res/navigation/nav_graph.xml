@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.project.myapplication.Fragments.HomeFragment"
+        tools:layout="@layout/fragment_home"
+        />
+    <fragment
+        android:id="@+id/navigation_deposit"
+        android:name="com.project.myapplication.Fragments.DepositFragment"
+        tools:layout="@layout/fragment_deposit"/>
+    <fragment
+        android:id="@+id/navigation_withdrawal"
+        android:name="com.project.myapplication.Fragments.WithdrawalFragment"
+        tools:layout="@layout/fragment_withdrawal"/>
+
+
+</navigation>

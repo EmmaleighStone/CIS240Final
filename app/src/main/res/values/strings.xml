@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CIS240Final</string>
+    <string name="app_name">Ten Talents Banking App</string>
     <string name="txtUsername">Username</string>
     <string name="txtPassword">Password</string>
     <string name="btnLogIn">log in</string>
@@ -10,6 +10,14 @@
     <string name="txtDepositAmt">Deposit Amount:</string>
     <string name="txtSampleMoney">0.00</string>
     <string name="txtWithdrawalAmt">Withdrawal Amount:</string>
-    <string name="txtIntro">Enter your username and password to log in!</string>
-    <string name="txtWelcome">Welcome to the Ten Talents App!</string>
+    <string name="txtIntro">Enter your username and password to log in.</string>
+    <string name="txtWelcome">Welcome to the Ten Talents Banking App!</string>
+    <string name="txtTransactionsTitle">Recent Transactions</string>
+    <string name="navBalance">Balance</string>
+    <string name="navDeposit">Deposit</string>
+    <string name="navWithdrawal">Withdrawal</string>
+    <string name="txtBalanceInquiry">Balance Inquiry</string>
+    <string name="txtDepositTitle">Make a Deposit</string>
+    <string name="txtWithdrawalTitle">Make a Withdrawal</string>
+    <string name="logout">logout</string>
 </resources>
