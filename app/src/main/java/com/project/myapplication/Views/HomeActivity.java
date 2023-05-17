@@ -51,7 +51,11 @@ public class HomeActivity extends AppCompatActivity {
         }
         @Override
         public boolean onOptionsItemSelected (@NonNull MenuItem item){
-
+            if (mediaPlayer != null)
+            {
+                mediaPlayer.stop();
+                mediaPlayer.release();
+            }
             startActivity(new Intent(HomeActivity.this, MainActivity.class));
             return true;
 
